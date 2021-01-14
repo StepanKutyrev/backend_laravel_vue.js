@@ -10,11 +10,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable, HasFactory;
 
     protected $hidden = [
         'password',
         'remember_token'
+    ];
+
+    protected $table = 'users';
+
+    protected $fillable = [
+        'name',
+        'email'
     ];
 
     public function getJWTIdentifier()
@@ -28,18 +35,10 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    protected $table = 'users';
-
-    protected $fillable = [
-        'name',
-        'email'
-    ];
-    public function messages(){
-
-        return $this->hasMany(Chat::class);
-
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
-    use HasFactory;
 }
 
 

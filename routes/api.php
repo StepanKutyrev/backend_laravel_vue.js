@@ -28,9 +28,8 @@ Route::group([
     Route::apiResource('User', 'AuthController');
     Route::post('refresh', 'AuthController@refresh');
 
-    Route::get('chat', 'ChatsController@index');
-    Route::get('messages', 'ChatsController@fetchMessages');
-    Route::post('messages', 'ChatsController@sendMessage');
+    Route::apiResource('messages', 'MessageController');
+
 });
 
 
